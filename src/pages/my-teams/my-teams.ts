@@ -9,6 +9,11 @@ import { TournamentsPage } from '../tournaments/tournaments';
 })
 export class MyTeamsPage {
 
+  public favorites = [
+    {coach:"James",division:"6th grade",id:812,name:"Baltimore Stars"},
+    {coach:"James",division:"6th grade",id:812,name:"Baltimore Stars"}
+]
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 

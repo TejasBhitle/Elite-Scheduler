@@ -12,9 +12,17 @@
 
 </ion-header>
 
-<ion-content padding>
-
+<ion-content >
+  <!--
   <p>No teams added</p>
+-->
+  <ion-list>
+    <ion-list-header>Followed Teams</ion-list-header>
+    <button ion-item *ngFor="let item of favorites">
+      <ion-icon name="star"></ion-icon>
+      {{ item.name}}
+    </button>
+  </ion-list>
 
   <button ion-button full (click)="goToTournament()" >Find</button>
 
