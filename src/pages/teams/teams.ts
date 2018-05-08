@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { TeamHomePage } from '../team-home/team-home';
 import { EliteApi } from '../../providers/elite-api/elite-api';
 
@@ -15,14 +15,25 @@ export class TeamsPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private eliteApi: EliteApi) {
+    private eliteApi: EliteApi,
+    private loadingController: LoadingController) {
     this.tournament = navParams.data;
     console.log(this.tournament.id);
   }
 
   ionViewDidLoad() {
-    this.eliteApi.getTeams(this.tournament.id)
-      .subscribe( teams => this.teams = teams);
+    let loader = this.loadingController.create({
+      content: 'Fetching Teams...'
+    })
+
+    loader.present().then(() => {
+      this.eliteApi.getTeams(this.tournament.id)
+        .subscribe( teams => {
+          this.teams = teams
+          loader.dismiss()
+        });
+    })
+
   }
 
   OnItemTapped($event, team){
