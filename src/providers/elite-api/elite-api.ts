@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 /*
   Generated class for the EliteApiProvider provider.
@@ -21,6 +22,13 @@ export class EliteApi {
       this.http.get(`${this.baseURl}/tournaments.json`)
       .subscribe(response => resolve(JSON.parse(response['_body'])))
     })
+  }
+
+  getTeams(id){
+    return this.http.get(`${this.baseURl}/tournaments-data/${id}/teams.json`)
+      .map(response => {
+        return JSON.parse(response['_body'])
+      })
   }
 
 }
