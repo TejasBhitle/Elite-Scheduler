@@ -3,12 +3,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-/*
-  Generated class for the EliteApiProvider provider.
 
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class EliteApi {
 
@@ -26,6 +21,14 @@ export class EliteApi {
 
   getTeams(id){
     return this.http.get(`${this.baseURl}/tournaments-data/${id}/teams.json`)
+      .map(response => {
+        return JSON.parse(response['_body'])
+      })
+  }
+
+  getGames(id){
+    id = "3dd50aaf-6b03-4497-b074-d81703f07ee8" //temp
+    return this.http.get(`${this.baseURl}/tournaments-data/${id}/games.json`)
       .map(response => {
         return JSON.parse(response['_body'])
       })
